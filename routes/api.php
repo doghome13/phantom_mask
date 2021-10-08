@@ -20,13 +20,13 @@ use Illuminate\Http\Request;
 Route::prefix('/pharmacy')->group(function () {
     Route::post('/list/period', "PharmacyController@getPharmaciesByPeriod");
 
-    Route::get('/list', "PharmacyController@getPharmacies");
+    Route::post('/list', "PharmacyController@getPharmacies");
     Route::post('/list/masks', "PharmacyController@getMasksByPharmacy");
     Route::post('/list/products', "PharmacyController@getProducts");
 
     Route::post('/list/price', "PharmacyController@getPharmaciesByPrice");
 
-    Route::get('/search', "PharmacyController@searchByName");
+    Route::post('/search', "PharmacyController@searchByName");
 });
 
 Route::prefix('/user')->group(function () {
@@ -35,5 +35,5 @@ Route::prefix('/user')->group(function () {
     Route::post('/list/transactions', "UserController@getTransactionsByPeriod");
 
     Route::post('/purchase', "UserController@purchaseMasks");
-    Route::get('/list', "UserController@getUsers");
+    Route::post('/list', "UserController@getUsers");
 });
