@@ -23,6 +23,11 @@ define('LARAVEL_START', microtime(true));
 
 require __DIR__.'/../vendor/autoload.php';
 
+if ((\Illuminate\Http\Request::capture())->method() == 'GET') {
+    include_once('index.html');
+    return;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Turn On The Lights

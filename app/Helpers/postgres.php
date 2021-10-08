@@ -12,11 +12,11 @@ if (!function_exists('get_db_config')) {
 
         return [
             'driver'   => 'pgsql',
-            'host'     => $data["host"],
-            'port'     => $data["port"],
+            'host'     => $data["host"] ?? '',
+            'port'     => $data["port"] ?? '',
             'database' => ltrim($data["path"], "/"),
-            'username' => $data["user"],
-            'password' => $data["pass"],
+            'username' => $data["user"] ?? '',
+            'password' => $data["pass"] ?? '',
             'charset'  => 'utf8',
             'prefix'   => '',
             'schema'   => 'public',
