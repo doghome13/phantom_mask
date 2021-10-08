@@ -14,7 +14,7 @@ class ModifyFulltextOnMasksTable extends Migration
      */
     public function up()
     {
-        DB::update('ALTER TABLE masks ADD FULLTEXT(name);');
+        DB::statement('ALTER TABLE masks ADD FULLTEXT(name)');
     }
 
     /**

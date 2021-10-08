@@ -14,7 +14,7 @@ class ModifyFulltextOnPharmaciesTable extends Migration
      */
     public function up()
     {
-        DB::update('ALTER TABLE pharmacies ADD FULLTEXT(name);');
+        DB::statement('ALTER TABLE pharmacies ADD FULLTEXT(name)');
     }
 
     /**
