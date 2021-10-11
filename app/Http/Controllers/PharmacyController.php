@@ -69,6 +69,7 @@ class PharmacyController extends Controller
 
         $query = Products::select([
             'masks.name',
+            'masks.color',
             'products.unit',
             'products.price',
         ])
