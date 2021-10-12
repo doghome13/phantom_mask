@@ -1,0 +1,308 @@
+{
+    "info": {
+        "_postman_id": "4e2f19e3-e614-433e-b0ad-1eab8ad3706b",
+        "name": "phantom_mask",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [{
+            "name": "營業中的藥局",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": []
+                },
+                "url": {
+                    "raw": "{{app_domain_url}}/api/pharmacy/list/period?date=2021-10-09&time=19:00:00",
+                    "host": [
+                        "{{app_domain_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "pharmacy",
+                        "list",
+                        "period"
+                    ],
+                    "query": [{
+                            "key": "date",
+                            "value": "2021-10-09",
+                            "description": "指定日期，格式：YYYY-MM-DD"
+                        },
+                        {
+                            "key": "time",
+                            "value": "19:00:00",
+                            "description": "指定時間，格式：H:i:s"
+                        }
+                    ]
+                },
+                "description": "List all pharmacies that are open at a certain time, and on a day of the week if requested"
+            },
+            "response": []
+        },
+        {
+            "name": "各藥局販售的口罩",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "{{app_domain_url}}/api/pharmacy/list/masks?pharmacyId=22",
+                    "host": [
+                        "{{app_domain_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "pharmacy",
+                        "list",
+                        "masks"
+                    ],
+                    "query": [{
+                        "key": "pharmacyId",
+                        "value": "22",
+                        "description": "藥局 id (pharmacies.id)"
+                    }]
+                },
+                "description": "* List all masks that are sold by a given pharmacy, sorted by mask name or mask price\n\n* 可由 `/api/pharmacy/list` 取得 `pharmacyId`"
+            },
+            "response": []
+        },
+        {
+            "name": "依據販售價格，搜尋符合的藥局",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "{{app_domain_url}}/api/pharmacy/list/price?min=10.05&max=18.03",
+                    "host": [
+                        "{{app_domain_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "pharmacy",
+                        "list",
+                        "price"
+                    ],
+                    "query": [{
+                            "key": "min",
+                            "value": "10.05",
+                            "description": "最低販售價格"
+                        },
+                        {
+                            "key": "max",
+                            "value": "18.03",
+                            "description": "最高販售價格"
+                        }
+                    ]
+                },
+                "description": "List all pharmacies that have more or less than x mask products within a price range"
+            },
+            "response": []
+        },
+        {
+            "name": "依據日期區間，顧客消費排名",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "{{app_domain_url}}/api/user/list/period?startAt=2021-10-12&endAt=2021-10-12",
+                    "host": [
+                        "{{app_domain_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "user",
+                        "list",
+                        "period"
+                    ],
+                    "query": [{
+                            "key": "startAt",
+                            "value": "2021-10-12",
+                            "description": "開始日期，格式：YYYY-MM-DD"
+                        },
+                        {
+                            "key": "endAt",
+                            "value": "2021-10-12",
+                            "description": "結束日期，格式：YYYY-MM-DD"
+                        }
+                    ]
+                },
+                "description": "The top x users by total transaction amount of masks within a date range"
+            },
+            "response": []
+        },
+        {
+            "name": "依據時間區間，各口罩銷售(累積)金額",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "{{app_domain_url}}/api/user/list/transactions?startAt=2021-10-12&endAt=2021-10-12",
+                    "host": [
+                        "{{app_domain_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "user",
+                        "list",
+                        "transactions"
+                    ],
+                    "query": [{
+                            "key": "startAt",
+                            "value": "2021-10-12",
+                            "description": "開始日期，格式：YYYY-MM-DD"
+                        },
+                        {
+                            "key": "endAt",
+                            "value": "2021-10-12",
+                            "description": "結束日期，格式：YYYY-MM-DD"
+                        }
+                    ]
+                },
+                "description": "The total amount of masks and dollar value of transactions that happened within a date range"
+            },
+            "response": []
+        },
+        {
+            "name": "搜尋藥局或口罩的名稱",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "{{app_domain_url}}/api/pharmacy/search?keyword=mask",
+                    "host": [
+                        "{{app_domain_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "pharmacy",
+                        "search"
+                    ],
+                    "query": [{
+                        "key": "keyword",
+                        "value": "mask",
+                        "description": "長度至少為 4"
+                    }]
+                },
+                "description": "Search for pharmacies or masks by name, ranked by relevance to search term"
+            },
+            "response": []
+        },
+        {
+            "name": "鍵入顧客的消費紀錄",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "{{app_domain_url}}/api/user/purchase?userId=14&productId=90",
+                    "host": [
+                        "{{app_domain_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "user",
+                        "purchase"
+                    ],
+                    "query": [{
+                            "key": "userId",
+                            "value": "14",
+                            "description": "顧客 id (users.id)"
+                        },
+                        {
+                            "key": "productId",
+                            "value": "90",
+                            "description": "商品 id (products.id)"
+                        }
+                    ]
+                },
+                "description": "* Process a user purchases a mask from a pharmacy, and handle all relevant data changes in an atomic transaction\n* 可由 `/api/user/list` 取得 userId\n* 可由 `/api/pharmacy/list/products` 取得 `productId`"
+            },
+            "response": []
+        },
+        {
+            "name": "販售的口罩、樣式和價格，可指定藥局",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "{{app_domain_url}}/api/pharmacy/list/products?pharmacyId=23",
+                    "host": [
+                        "{{app_domain_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "pharmacy",
+                        "list",
+                        "products"
+                    ],
+                    "query": [{
+                        "key": "pharmacyId",
+                        "value": "23",
+                        "description": "藥局 id (pharmacies.id)"
+                    }]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "(所有)顧客的資訊",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "{{app_domain_url}}/api/user/list",
+                    "host": [
+                        "{{app_domain_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "user",
+                        "list"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "(所有)藥局的資訊",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "{{app_domain_url}}/api/pharmacy/list",
+                    "host": [
+                        "{{app_domain_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "pharmacy",
+                        "list"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ],
+    "event": [{
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [{
+        "key": "app_domain_url",
+        "value": ""
+    }]
+}
