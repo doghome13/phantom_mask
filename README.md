@@ -2,12 +2,12 @@
 You are building a backend service and a database for a pharmacy platform, with the following 2 raw datasets:
 
 ## Pharmacy Data
-Link: [data/pharmacies.json](data/pharmacies.json)
+Link: [data/pharmacies.json](storage/data/pharmacies.json)
 
 This dataset contains a list of pharmacies with their names, opening hours, cash balances, and mask products. Cash balance represents the amount of money that a pharmacy hold in the merchant account on this platform. It increases by the mask price whenever a user purchases masks from the pharmacy.
 
 ## User data
-Link: [data/users.json](data/users.json)
+Link: [data/users.json](storage/data/users.json)
 
 This dataset contains a list of users with their names, cash balances, and purchasing histories. Cash balance represents the amount of money that a user hold in his wallets on this platform. It decreases by the mask price whenever the user purchases masks.
 
