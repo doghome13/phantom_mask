@@ -11,11 +11,11 @@ class UserValidator extends BaseValidator
         (new static($data, [
             'startAt' => [
                 'required',
-                'date_format:Y/m/d',
+                'date_format:Y-m-d',
             ],
             'endAt' => [
                 'required',
-                'date_format:Y/m/d',
+                'date_format:Y-m-d',
             ],
         ]))->check();
     }

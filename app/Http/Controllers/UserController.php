@@ -26,7 +26,8 @@ class UserController extends Controller
         $startAt = $request->get('startAt') . ' 00:00:00';
         $endAt   = $request->get('endAt') . ' 23:59:59';
 
-        $query = PurchaseHistories::selectRaw("
+        try {
+            $query = PurchaseHistories::selectRaw("
                 purchase_histories.user_id,
                 users.name,
                 SUM(purchase_histories.transaction_amount) AS total
@@ -34,9 +35,12 @@ class UserController extends Controller
             ->join('users', 'users.id', '=', 'purchase_histories.user_id')
             ->whereBetween('transaction_date', [$startAt, $endAt])
             ->orderByRaw("SUM(purchase_histories.transaction_amount) DESC")
-            ->groupBy('purchase_histories.user_id')
+            ->groupBy(['purchase_histories.user_id', 'users.name'])
             ->get()
             ->toArray();
+        } catch (Exception $th) {
+            throw new Exception($th->getMessage());
+        }
 
         return [
             'data' => $query,
@@ -55,13 +59,17 @@ class UserController extends Controller
         $startAt = $request->get('startAt') . ' 00:00:00';
         $endAt   = $request->get('endAt') . ' 23:59:59';
 
-        $query = PurchaseHistories::selectRaw("SUM(transaction_amount) AS `sum`, masks.name, masks.color")
-            ->join('products', 'products.id', '=', 'purchase_histories.product_id')
-            ->join('masks', 'masks.id', '=', 'products.mask_id')
-            ->whereBetween('transaction_date', [$startAt, $endAt])
-            ->groupBy('masks.id')
-            ->get()
-            ->toArray();
+        try {
+            $query = PurchaseHistories::selectRaw("SUM(transaction_amount) AS sum, masks.name, masks.color")
+                ->join('products', 'products.id', '=', 'purchase_histories.product_id')
+                ->join('masks', 'masks.id', '=', 'products.mask_id')
+                ->whereBetween('transaction_date', [$startAt, $endAt])
+                ->groupBy(['masks.id', 'masks.name', 'masks.color'])
+                ->get()
+                ->toArray();
+        } catch (Exception $th) {
+            throw new Exception($th->getMessage());
+        }
 
         return [
             'data' => $query,
