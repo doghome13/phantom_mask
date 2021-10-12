@@ -3,7 +3,7 @@
 
 ## Required
 ### API Document
-  Import [data/postman.json](ata/phantom_mask.postman_collection.json) json file to Postman
+  Import [data/postman.json](storage/data/phantom_mask.postman_collection.json) json file to Postman
 
 ### Import Data Commands
   `php artisan migrate`\
