@@ -32,7 +32,7 @@ class UserController extends Controller
                 SUM(purchase_histories.transaction_amount) AS total
                 ")
             ->join('users', 'users.id', '=', 'purchase_histories.user_id')
-            ->whereBetween('transaction_date', [$startAt, $endAt])
+            // ->whereBetween('transaction_date', [$startAt, $endAt])
             ->orderByRaw("SUM(purchase_histories.transaction_amount) DESC")
             ->groupBy('purchase_histories.user_id')
             ->get()
@@ -58,7 +58,7 @@ class UserController extends Controller
         $query = PurchaseHistories::selectRaw("SUM(transaction_amount) AS `sum`, masks.name, masks.color")
             ->join('products', 'products.id', '=', 'purchase_histories.product_id')
             ->join('masks', 'masks.id', '=', 'products.mask_id')
-            ->whereBetween('transaction_date', [$startAt, $endAt])
+            // ->whereBetween('transaction_date', [$startAt, $endAt])
             ->groupBy('masks.id')
             ->get()
             ->toArray();

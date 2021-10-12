@@ -15,7 +15,7 @@ class PharmacyValidator extends BaseValidator
             ],
             'date' => [
                 'nullable',
-                'date_format:Y/m/d',
+                'date_format:Y-m-d',
             ],
         ]))->check();
     }
